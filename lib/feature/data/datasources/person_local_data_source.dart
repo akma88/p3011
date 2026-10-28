@@ -6,11 +6,6 @@ import 'package:p3011/feature/data/models/person_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class PersonLocalDataSource {
-  /// Gets the cached [List<PersonModel>] which was gotten the last time
-  /// the user had an internet connection.
-  ///
-  /// Throws [CacheException] if no cached data is present.
-
   Future<List<PersonModel>> getLastPersonsFromCache();
   Future<void> personsToCache(List<PersonModel> persons);
 }
