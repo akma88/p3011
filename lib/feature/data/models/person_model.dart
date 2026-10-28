@@ -1,20 +1,20 @@
+import 'package:meta/meta.dart';
 import 'package:p3011/feature/data/models/location_model.dart';
 import 'package:p3011/feature/domain/entities/person_entity.dart';
-import 'package:meta/meta.dart';
 
 class PersonModel extends PersonEntity {
   PersonModel({
-    required id,
-    required name,
-    required status,
-    required species,
-    required type,
-    required gender,
-    required origin,
-    required location,
-    required image,
-    required episode,
-    required created,
+    @required id,
+    @required name,
+    @required status,
+    @required species,
+    @required type,
+    @required gender,
+    @required origin,
+    @required location,
+    @required image,
+    @required episode,
+    @required created,
   }) : super(
          id: id,
          name: name,

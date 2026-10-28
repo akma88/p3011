@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:meta/meta.dart';
 import 'package:p3011/core/error/exception.dart';
 import 'package:p3011/feature/data/models/person_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:meta/meta.dart';
 
 abstract class PersonLocalDataSource {
   Future<List<PersonModel>> getLastPersonsFromCache();

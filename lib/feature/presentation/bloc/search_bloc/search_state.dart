@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:p3011/feature/domain/entities/person_entity.dart';
+import 'package:meta/meta.dart';
 
 abstract class PersonSearchState extends Equatable {
   const PersonSearchState();
@@ -15,7 +16,7 @@ class PersonSearchLoading extends PersonSearchState {}
 class PersonSearchLoaded extends PersonSearchState {
   final List<PersonEntity> persons;
 
-  const PersonSearchLoaded({required this.persons});
+  PersonSearchLoaded({required this.persons});
 
   @override
   List<Object> get props => [persons];
@@ -24,7 +25,7 @@ class PersonSearchLoaded extends PersonSearchState {
 class PersonSearchError extends PersonSearchState {
   final String message;
 
-  const PersonSearchError({required this.message});
+  PersonSearchError({required this.message});
 
   @override
   List<Object> get props => [message];

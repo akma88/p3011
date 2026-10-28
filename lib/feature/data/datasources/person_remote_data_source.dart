@@ -1,30 +1,38 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:meta/meta.dart';
 import 'package:p3011/core/error/exception.dart';
 import 'package:p3011/feature/data/models/person_model.dart';
-import 'package:meta/meta.dart';
 
 abstract class PersonRemoteDataSource {
+  /// Calls the https://rickandmortyapi.com/api/character/?page=1 endpoint.
+  ///
+  /// Throws a [ServerException] for all error codes.
   Future<List<PersonModel>> getAllPersons(int page);
+
+  /// Calls the https://rickandmortyapi.com/api/character/?name=rick endpoint.
+  ///
+  /// Throws a [ServerException] for all error codes.
   Future<List<PersonModel>> searchPerson(String query);
 }
 
 class PersonRemoteDataSourceImpl implements PersonRemoteDataSource {
-  late final http.Client client;
+  final http.Client client;
 
   PersonRemoteDataSourceImpl({required this.client});
 
   @override
-  Future<List<PersonModel>> getAllPersons(int page) =>
-      getPersonFromUrl('https://rickandmortyapi.com/api/character/?page=$page');
+  Future<List<PersonModel>> getAllPersons(int page) => _getPersonFromUrl(
+    'https://rickandmortyapi.com/api/character/?page=$page',
+  );
 
   @override
-  Future<List<PersonModel>> searchPerson(String query) => getPersonFromUrl(
+  Future<List<PersonModel>> searchPerson(String query) => _getPersonFromUrl(
     'https://rickandmortyapi.com/api/character/?name=$query',
   );
 
-  Future<List<PersonModel>> getPersonFromUrl(String url) async {
+  Future<List<PersonModel>> _getPersonFromUrl(String url) async {
     print(url);
     final response = await client.get(
       Uri.parse(url),
