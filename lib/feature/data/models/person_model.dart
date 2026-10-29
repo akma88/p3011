@@ -1,33 +1,20 @@
-import 'package:meta/meta.dart';
 import 'package:p3011/feature/data/models/location_model.dart';
 import 'package:p3011/feature/domain/entities/person_entity.dart';
 
 class PersonModel extends PersonEntity {
   PersonModel({
-    @required id,
-    @required name,
-    @required status,
-    @required species,
-    @required type,
-    @required gender,
-    @required origin,
-    @required location,
-    @required image,
-    @required episode,
-    @required created,
-  }) : super(
-         id: id,
-         name: name,
-         status: status,
-         species: species,
-         type: type,
-         gender: gender,
-         origin: origin,
-         location: location,
-         image: image,
-         episode: episode,
-         created: created,
-       );
+    required super.id,
+    required super.name,
+    required super.status,
+    required super.species,
+    required super.type,
+    required super.gender,
+    required super.origin,
+    required super.location,
+    required super.image,
+    required super.episode,
+    required super.created,
+  });
 
   factory PersonModel.fromJson(Map<String, dynamic> json) {
     return PersonModel(
@@ -59,8 +46,14 @@ class PersonModel extends PersonEntity {
       'species': species,
       'type': type,
       'gender': gender,
-      'origin': origin,
-      'location': location,
+      'origin': switch (origin) {
+        final value? => {'name': value.name, 'url': value.url},
+        null => null,
+      },
+      'location': switch (location) {
+        final value? => {'name': value.name, 'url': value.url},
+        null => null,
+      },
       'image': image,
       'episode': episode,
       'created': created.toIso8601String(),

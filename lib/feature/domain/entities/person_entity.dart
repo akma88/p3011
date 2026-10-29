@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
 
 class PersonEntity extends Equatable {
   final int id;
@@ -8,8 +7,8 @@ class PersonEntity extends Equatable {
   final String species;
   final String type;
   final String gender;
-  final LocationEntity origin;
-  final LocationEntity location;
+  final LocationEntity? origin;
+  final LocationEntity? location;
   final String image;
   final List<String> episode;
   final DateTime created;
@@ -29,7 +28,7 @@ class PersonEntity extends Equatable {
   });
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
     id,
     name,
     status,

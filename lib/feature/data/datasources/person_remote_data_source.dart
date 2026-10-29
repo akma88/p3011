@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:meta/meta.dart';
 import 'package:p3011/core/error/exception.dart';
 import 'package:p3011/feature/data/models/person_model.dart';
 
@@ -33,7 +32,6 @@ class PersonRemoteDataSourceImpl implements PersonRemoteDataSource {
   );
 
   Future<List<PersonModel>> _getPersonFromUrl(String url) async {
-    print(url);
     final response = await client.get(
       Uri.parse(url),
       headers: {'Content-Type': 'application/json'},

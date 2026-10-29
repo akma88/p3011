@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 class PersonDetailPage extends StatelessWidget {
   final PersonEntity person;
 
-  const PersonDetailPage({Key? key, required this.person}) : super(key: key);
+  const PersonDetailPage({super.key, required this.person});
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +27,7 @@ class PersonDetailPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 12),
-            Container(
-              child: PersonCacheImage(
-                width: 260,
-                height: 260,
-                imageUrl: person.image,
-              ),
-            ),
+            PersonCacheImage(width: 260, height: 260, imageUrl: person.image),
             SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -62,8 +56,11 @@ class PersonDetailPage extends StatelessWidget {
               person.episode.length.toString(),
             ),
             ...buildText('Species:', person.species),
-            ...buildText('Last known location:', person.location.name),
-            ...buildText('Origin:', person.origin.name),
+            ...buildText(
+              'Last known location:',
+              person.location?.name ?? 'Unknown',
+            ),
+            ...buildText('Origin:', person.origin?.name ?? 'Unknown'),
             ...buildText('Was created:', person.created.toString()),
           ],
         ),

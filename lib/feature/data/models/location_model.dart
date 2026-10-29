@@ -1,7 +1,7 @@
 import 'package:p3011/feature/domain/entities/person_entity.dart';
 
 class LocationModel extends LocationEntity {
-  LocationModel({name, url}) : super(name: name, url: url);
+  const LocationModel({required super.name, required super.url});
 
   factory LocationModel.fromJson(Map<String, dynamic> json) {
     return LocationModel(name: json['name'], url: json['url']);

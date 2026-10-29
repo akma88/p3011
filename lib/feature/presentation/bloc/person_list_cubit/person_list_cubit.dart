@@ -5,8 +5,8 @@ import 'package:p3011/feature/domain/entities/person_entity.dart';
 import 'package:p3011/feature/domain/usercases/get_all_persons.dart';
 import 'package:p3011/feature/presentation/bloc/person_list_cubit/person_list_state.dart';
 
-const SERVER_FAILURE_MESSAGE = 'Server Failure';
-const CACHED_FAILURE_MESSAGE = 'Cache Failure';
+const serverFailureMessage = 'Server Failure';
+const cachedFailureMessage = 'Cache Failure';
 
 class PersonListCubit extends Cubit<PersonState> {
   final GetAllPersons getAllPersons;
@@ -35,18 +35,17 @@ class PersonListCubit extends Cubit<PersonState> {
         page++;
         final persons = (state as PersonLoading).oldPersonsList;
         persons.addAll(character);
-        print('List length: ${persons.length.toString()}');
         emit(PersonLoaded(persons));
       },
     );
   }
 
   String _mapFailureToMessage(Failure failure) {
-    switch (failure.runtimeType) {
-      case ServerFailure:
-        return SERVER_FAILURE_MESSAGE;
-      case CacheFailure:
-        return CACHED_FAILURE_MESSAGE;
+    switch (failure) {
+      case ServerFailure():
+        return serverFailureMessage;
+      case CacheFailure():
+        return cachedFailureMessage;
       default:
         return 'Unexpected Error';
     }

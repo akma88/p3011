@@ -6,7 +6,7 @@ import 'package:p3011/feature/presentation/bloc/search_bloc/search_event.dart';
 import 'package:p3011/feature/presentation/bloc/search_bloc/search_state.dart';
 import 'package:p3011/feature/presentation/widgets/search_result.dart';
 
-class CustomSearchDelegate extends SearchDelegate {
+class CustomSearchDelegate extends SearchDelegate<void> {
   CustomSearchDelegate() : super(searchFieldLabel: 'Search for characters...');
 
   final _suggestions = ['Rick', 'Morty', 'Summer', 'Beth', 'Jerry'];
@@ -35,10 +35,10 @@ class CustomSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    print('Inside custom search delegate and search query is $query');
-
-    BlocProvider.of<PersonSearchBloc>(context, listen: false)
-      ..add(SearchPersons(query));
+    BlocProvider.of<PersonSearchBloc>(
+      context,
+      listen: false,
+    ).add(SearchPersons(query));
 
     return BlocBuilder<PersonSearchBloc, PersonSearchState>(
       builder: (context, state) {
@@ -49,14 +49,12 @@ class CustomSearchDelegate extends SearchDelegate {
           if (person.isEmpty) {
             return _showErrorText('No Characters with that name found');
           }
-          return Container(
-            child: ListView.builder(
-              itemCount: person.isNotEmpty ? person.length : 0,
-              itemBuilder: (context, int index) {
-                PersonEntity result = person[index];
-                return SearchResult(personResult: result);
-              },
-            ),
+          return ListView.builder(
+            itemCount: person.isNotEmpty ? person.length : 0,
+            itemBuilder: (context, int index) {
+              PersonEntity result = person[index];
+              return SearchResult(personResult: result);
+            },
           );
         } else if (state is PersonSearchError) {
           return _showErrorText(state.message);
@@ -81,7 +79,7 @@ class CustomSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    if (query.length > 0) {
+    if (query.isNotEmpty) {
       return Container();
     }
 

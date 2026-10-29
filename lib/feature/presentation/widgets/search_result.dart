@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 import 'package:p3011/feature/domain/entities/person_entity.dart';
 import 'package:p3011/feature/presentation/pages/person_detail_screen.dart';
 import 'package:p3011/feature/presentation/widgets/person_cache_image_widget.dart';
@@ -7,7 +6,7 @@ import 'package:p3011/feature/presentation/widgets/person_cache_image_widget.dar
 class SearchResult extends StatelessWidget {
   final PersonEntity personResult;
 
-  SearchResult({required this.personResult});
+  const SearchResult({super.key, required this.personResult});
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +28,10 @@ class SearchResult extends StatelessWidget {
             SizedBox(
               height: 300,
               width: double.infinity,
-              child: Container(
-                child: PersonCacheImage(
-                  width: double.infinity,
-                  height: 300,
-                  imageUrl: personResult.image,
-                ),
+              child: PersonCacheImage(
+                width: double.infinity,
+                height: 300,
+                imageUrl: personResult.image,
               ),
             ),
             Padding(
@@ -47,7 +44,7 @@ class SearchResult extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                personResult.location.name,
+                personResult.location?.name ?? 'Unknown',
                 style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16.0),
               ),
             ),

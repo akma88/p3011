@@ -6,11 +6,11 @@ class PersonCacheImage extends StatelessWidget {
   final double width, height;
 
   const PersonCacheImage({
-    Key? key,
+    super.key,
     required this.imageUrl,
     required this.width,
     required this.height,
-  }) : super(key: key);
+  });
 
   Widget _imageWidget(ImageProvider imageProvider) {
     return Container(
@@ -29,7 +29,7 @@ class PersonCacheImage extends StatelessWidget {
     return CachedNetworkImage(
       width: width,
       height: height,
-      imageUrl: imageUrl ?? '',
+      imageUrl: imageUrl,
       imageBuilder: (context, imageProvider) {
         return _imageWidget(imageProvider);
       },

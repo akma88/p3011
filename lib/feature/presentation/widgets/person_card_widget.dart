@@ -7,7 +7,7 @@ import 'package:p3011/feature/presentation/widgets/person_cache_image_widget.dar
 class PersonCard extends StatelessWidget {
   final PersonEntity person;
 
-  const PersonCard({Key? key, required this.person}) : super(key: key);
+  const PersonCard({super.key, required this.person});
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +27,7 @@ class PersonCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Container(
-              child: PersonCacheImage(
-                width: 166,
-                height: 166,
-                imageUrl: person.image,
-              ),
-            ),
+            PersonCacheImage(width: 166, height: 166, imageUrl: person.image),
             const SizedBox(width: 16),
             Expanded(
               child: Column(
@@ -79,7 +73,7 @@ class PersonCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    person.location.name,
+                    person.location?.name ?? 'Unknown',
                     style: TextStyle(color: Colors.white),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -88,7 +82,7 @@ class PersonCard extends StatelessWidget {
                   Text('Origin:', style: TextStyle(color: AppColors.greyColor)),
                   const SizedBox(height: 4),
                   Text(
-                    person.origin.name,
+                    person.origin?.name ?? 'Unknown',
                     style: TextStyle(color: Colors.white),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
